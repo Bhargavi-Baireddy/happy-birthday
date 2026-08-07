@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, YOUR FRIEND NAME 🎀</title>
+
+<!-- ============================================================
+     FONTS
+     Display / signature font: "Fraunces" (warm, editorial serif)
+     Handwriting font: "Caveat" (used for the letter + notes)
+     Body / UI font: "Manrope"
+============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Caveat:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     CUSTOM CURSOR (desktop only — hidden automatically on touch)
+============================================================ -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ============================================================
+     LOADING SCREEN
+============================================================ -->
+<div class="loader" id="loader">
+  <div class="loader-sky">
+    <div class="loader-stars"></div>
+    <div class="loader-hearts" id="loaderHearts"></div>
+  </div>
+  <div class="loader-content">
+    <p class="loader-label">preparing a surprise</p>
+    <div class="loader-ring">
+      <svg viewBox="0 0 120 120" class="loader-svg">
+        <circle cx="60" cy="60" r="52" class="loader-track"></circle>
+        <circle cx="60" cy="60" r="52" class="loader-fill" id="loaderFill"></circle>
+      </svg>
+      <span class="loader-percent" id="loaderPercent">0%</span>
+    </div>
+    <p class="loader-sub">wrapping little pieces of love, just for you</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     GLOBAL UI: progress bar / back to top / music / theme
+============================================================ -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="control-stack">
+  <!-- EDIT: replace assets/music/music.mp3 with your song -->
+  <audio id="bgMusic" loop preload="none">
+    <source src="assets/music/music.mp3" type="audio/mpeg">
+  </audio>
+  <button class="ctrl-btn" id="musicBtn" aria-label="Toggle music" title="Music">
+    <svg viewBox="0 0 24 24" id="musicIconOn" class="ctrl-icon"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+  </button>
+  <button class="ctrl-btn" id="themeBtn" aria-label="Toggle theme" title="Dreamy / Midnight mode">
+    <svg viewBox="0 0 24 24" class="ctrl-icon"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- ambient floating layer reused across the page -->
+<div class="ambient-layer" id="ambientLayer" aria-hidden="true"></div>
+
+<!-- ============================================================
+     HERO / WELCOME
+============================================================ -->
+<section class="hero" id="hero">
+  <div class="hero-sky" aria-hidden="true">
+    <div class="stars-field"></div>
+    <div class="hero-hearts" id="heroHearts"></div>
+    <div class="hero-flowers" id="heroFlowers"></div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">a little corner of the internet, just for</p>
+    <h1 class="hero-title">
+      <span class="hero-title-line">Happy Birthday</span>
+      <!-- EDIT: replace with her name -->
+      <span class="hero-title-name" id="friendName">JOSHU</span>
+    </h1>
+    <p class="hero-tagline">You make the world brighter just by being in it.</p>
+    <button class="btn-primary" id="openSurpriseBtn">
+      <span>Open Your Surprise</span>
+      <svg viewBox="0 0 24 24" class="btn-arrow"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <span></span>
+    <p>scroll to begin the journey</p>
+  </div>
+</section>
+
+<main id="journey">
+
+<!-- ============================================================
+     SECTION 1 — A LETTER FROM MY HEART
+============================================================ -->
+<section class="section section-letter" id="letter">
+  <p class="section-eyebrow">chapter one</p>
+  <h2 class="section-title">A Letter From My Heart</h2>
+  <p class="section-sub">click the envelope to open it</p>
+
+  <div class="envelope-wrap">
+    <div class="envelope" id="envelope">
+      <div class="envelope-back"></div>
+      <div class="letter-paper" id="letterPaper">
+        <!-- EDIT: replace with your real letter -->
+        <p class="letter-text">
+          My dearest friend,<br><br>
+          I don't think words will ever fully hold what I feel about having you in my life —
+          but today, of all days, I wanted to try anyway.<br><br>
+          Thank you for every late-night conversation, every silly joke that somehow still makes me laugh,
+          and every moment you showed up for me without me even having to ask.
+          You have this way of turning ordinary days into memories I'll keep forever.<br><br>
+          On your birthday, I hope you feel even a fraction of the joy you give everyone around you.
+          Here's to more adventures, more laughter, and more years of us.<br><br>
+          With all my love,<br>
+          You know who i am 💌
+        </p>
+      </div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-front"></div>
+      <div class="envelope-seal">💌</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 2 — TIMELINE OF MEMORIES
+============================================================ -->
+<section class="section section-timeline" id="timeline">
+  <p class="section-eyebrow">chapter two</p>
+  <h2 class="section-title">Timeline of Memories</h2>
+  <p class="section-sub">every little moment that got us here</p>
+
+  <div class="timeline" id="timelineTrack">
+    <!-- EDIT: duplicate .timeline-item for more memories -->
+    <article class="timeline-item">
+      <div class="timeline-img"><img src="assets/images/image1.jpeg" alt="Memory 1" loading="lazy"></div>
+      <div class="timeline-card">
+        <span class="timeline-date">Someday</span>
+        <h3>Little Kutti Joshu</h3>
+        <p>Bale unnav saree lo cute ga </p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-img"><img src="assets/images/image2.jpeg" alt="Memory 2" loading="lazy"></div>
+      <div class="timeline-card">
+        <span class="timeline-date">Jan 13 2025</span>
+        <h3>Your Surprise Arrival</h3>
+        <p>Sudden ga vachi meet ayyav but stayed for a short time</p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-img"><img src="assets/images/image3.jpeg" alt="Memory 3" loading="lazy"></div>
+      <div class="timeline-card">
+        <span class="timeline-date">june 2 2025</span>
+        <h3>Our Meet</h3>
+        <p>I met you the day you were going back and the dairy milk was delicious</p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-img"><img src="assets/images/image4.jpeg" alt="Memory 4" loading="lazy"></div>
+      <div class="timeline-card">
+        <span class="timeline-date">june 15 2024</span>
+        <h3>Us</h3>
+        <p>You were there when it mattered most, no questions asked.</p>
+      </div>
+    </article>
+    <article class="timeline-item">
+      <div class="timeline-img"><img src="assets/images/image5.jpeg" alt="Memory 5" loading="lazy"></div>
+      <div class="timeline-card">
+        <span class="timeline-date">oct 04 2025</span>
+        <h3>Still Going Strong</h3>
+        <p>And here we are — celebrating another year of you.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 3 — PHOTO GALLERY
+============================================================ -->
+<section class="section section-gallery" id="gallery">
+  <p class="section-eyebrow">chapter three</p>
+  <h2 class="section-title">Photo Gallery</h2>
+  <p class="section-sub">a few of my favorite frames of you</p>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <!-- EDIT: generated via JS from photo1.jpg .. photo12.jpg -->
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">‹</button>
+  <img src="" alt="" class="lightbox-img" id="lightboxImg">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">›</button>
+  <p class="lightbox-count" id="lightboxCount"></p>
+</div>
+
+<!-- ============================================================
+     SECTION 4 — THINGS I LOVE ABOUT YOU
+============================================================ -->
+<section class="section section-love" id="love">
+  <p class="section-eyebrow">chapter four</p>
+  <h2 class="section-title">Things I Love About You</h2>
+  <p class="section-sub">hover each card to flip it</p>
+
+  <div class="flip-grid" id="loveGrid">
+    <!-- EDIT: generated via JS from the loveThings array in script.js -->
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 5 — 365 REASONS
+============================================================ -->
+<section class="section section-reasons" id="reasons">
+  <p class="section-eyebrow">chapter five</p>
+  <h2 class="section-title">365 Reasons I Adore You</h2>
+  <p class="section-sub">one for every day of the year — here's a taste</p>
+
+  <div class="reason-card" id="reasonCard">
+    <span class="reason-number" id="reasonNumber">#1</span>
+    <p class="reason-text" id="reasonText">Because your laugh is genuinely my favorite sound.</p>
+  </div>
+  <button class="btn-secondary" id="reasonBtn">Show Another Reason</button>
+</section>
+
+<!-- ============================================================
+     SECTION 6 — DIGITAL GIFTS (redesigned)
+     Each gift starts as a wrapped present (lid + ribbon + bow).
+     Clicking it shakes the box, unties the ribbon, opens the lid,
+     and pops a modal showing the real gift image/GIF + a message.
+     EDIT: put your files in assets/gifts/ (gift1.gif, gift2.jpg, …)
+     and edit the `gifts` array in script.js to match.
+============================================================ -->
+<section class="section section-gifts" id="gifts">
+  <p class="section-eyebrow">chapter six</p>
+  <h2 class="section-title">🎁 Little Gifts Just For You</h2>
+  <p class="section-sub">I may not be able to wrap these in paper, but I wrapped them with lots of love.</p>
+
+  <p class="gifts-progress" id="giftsProgress">You've opened 0 of 8 gifts.</p>
+
+  <div class="gift-grid" id="giftGrid">
+    <!-- EDIT: generated via JS from the `gifts` array in script.js -->
+  </div>
+</section>
+
+<div class="gift-modal" id="giftModal">
+  <div class="gift-modal-card">
+    <button class="gift-modal-close" id="giftModalClose">✕</button>
+    <div class="gift-modal-media" id="giftModalMedia">
+      <!-- EDIT: falls back to a heart if the image/gif fails to load -->
+      <img id="giftModalImg" src="" alt="">
+    </div>
+    <h3 id="giftModalTitle">A Gift For You</h3>
+    <p id="giftModalMsg"></p>
+  </div>
+</div>
+
+<!-- shown once every gift has been opened -->
+<div class="gifts-celebration" id="giftsCelebration">
+  <div class="gifts-celebration-sky" id="giftsCelebrationSky"></div>
+  <div class="gifts-celebration-content">
+    <span class="gifts-celebration-heart">❤️</span>
+    <p>Yay! You found every little surprise I made for you ❤️</p>
+    <button class="gifts-celebration-close" id="giftsCelebrationClose">Close</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     SECTION 7 — MESSAGE WALL
+============================================================ -->
+<section class="section section-wall" id="wall">
+  <p class="section-eyebrow">chapter seven</p>
+  <h2 class="section-title">Message Wall</h2>
+  <p class="section-sub">little notes, stuck with love</p>
+
+  <div class="notes-wall" id="notesWall">
+    <!-- EDIT: generated via JS from the notes array -->
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 8 — OUR PHOTO COLLAGE (heart shape)
+============================================================ -->
+<section class="section section-collage" id="collage">
+  <p class="section-eyebrow">chapter eight</p>
+  <h2 class="section-title">your Photo Collage</h2>
+  <p class="section-sub">shaped like the way I feel about you</p>
+
+  <div class="heart-collage" id="heartCollage">
+    <!-- EDIT: generated via JS, uses assets/images/photo1.jpg..photo13.jpg -->
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 9 — COUNTDOWN SINCE FRIENDSHIP BEGAN
+============================================================ -->
+<section class="section section-countdown" id="countdown">
+  <p class="section-eyebrow">chapter nine</p>
+  <h2 class="section-title">Since The Day You Born</h2>
+  <!-- EDIT: change this date to when your friendship began -->
+  <p class="section-sub" data-friendship-date="2006-08-08T00:00:00">counting every second since Aug 08, 2006</p>
+
+  <div class="countdown-grid">
+    <div class="countdown-box"><span id="cdDays">0</span><label>Days</label></div>
+    <div class="countdown-box"><span id="cdHours">0</span><label>Hours</label></div>
+    <div class="countdown-box"><span id="cdMinutes">0</span><label>Minutes</label></div>
+    <div class="countdown-box"><span id="cdSeconds">0</span><label>Seconds</label></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 10 — MEMORY MAP
+============================================================ -->
+<section class="section section-map" id="memoryMap">
+  <p class="section-eyebrow">chapter ten</p>
+  <h2 class="section-title">Memory Map</h2>
+  <p class="section-sub">click a pin to relive the moment</p>
+
+  <div class="map-wrap">
+    <svg class="world-map" id="worldMapSvg" viewBox="0 0 1000 500" aria-hidden="true">
+      <!-- simplified illustrative world silhouette -->
+      <path d="M60 220 Q120 160 200 190 Q260 150 330 180 Q400 140 460 190 Q520 160 600 200 Q680 170 760 210 Q850 190 930 230 Q960 260 920 300 Q850 320 780 300 Q700 330 620 310 Q540 340 460 310 Q380 330 300 300 Q220 320 150 290 Q80 280 60 220 Z" fill="url(#mapGrad)" opacity="0.9"/>
+      <path d="M300 330 Q340 380 320 430 Q290 460 270 420 Q260 370 300 330 Z" fill="url(#mapGrad)" opacity="0.9"/>
+      <defs>
+        <linearGradient id="mapGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="var(--lavender)"/>
+          <stop offset="100%" stop-color="var(--sky)"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="map-pins" id="mapPins">
+      <!-- EDIT: generated via JS from mapMemories array -->
+    </div>
+  </div>
+</section>
+
+<div class="map-popup" id="mapPopup">
+  <div class="map-popup-card">
+    <button class="map-popup-close" id="mapPopupClose">✕</button>
+    <h3 id="mapPopupTitle"></h3>
+    <p id="mapPopupText"></p>
+  </div>
+</div>
+
+<!-- ============================================================
+     SECTION 11 — FUN QUIZ
+============================================================ -->
+<section class="section section-quiz" id="quiz">
+  <p class="section-eyebrow">chapter eleven</p>
+  <h2 class="section-title">How Well Do You Know Us?</h2>
+  <p class="section-sub">a tiny quiz, just for fun</p>
+
+  <div class="quiz-box" id="quizBox">
+    <div class="quiz-progress"><span id="quizProgressBar"></span></div>
+    <div id="quizQuestionWrap"></div>
+  </div>
+
+  <div class="quiz-result" id="quizResult">
+    <div class="quiz-confetti-burst" id="quizConfetti"></div>
+    <h3>You know us so well 🎉</h3>
+    <p id="quizScoreText"></p>
+    <button class="btn-secondary" id="quizRestart">Play Again</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 12 — OPEN WHEN...
+============================================================ -->
+<section class="section section-openwhen" id="openWhen">
+  <p class="section-eyebrow">chapter twelve</p>
+  <h2 class="section-title">Open When...</h2>
+  <p class="section-sub">little envelopes for whenever you need them</p>
+
+  <div class="openwhen-grid" id="openWhenGrid">
+    <!-- EDIT: generated via JS from openWhenLetters array -->
+  </div>
+</section>
+
+<div class="openwhen-modal" id="openWhenModal">
+  <div class="openwhen-modal-card">
+    <button class="openwhen-modal-close" id="openWhenModalClose">✕</button>
+    <h3 id="openWhenTitle"></h3>
+    <p id="openWhenText"></p>
+  </div>
+</div>
+
+<!-- ============================================================
+     SECTION 13 — WISH JAR
+============================================================ -->
+<section class="section section-jar" id="jar">
+  <p class="section-eyebrow">chapter thirteen</p>
+  <h2 class="section-title">The Wish Jar</h2>
+  <p class="section-sub">tap a glowing wish to read it</p>
+
+  <div class="wish-jar-wrap">
+    <div class="wish-jar" id="wishJar">
+      <div class="jar-glass"></div>
+      <div class="jar-wishes" id="jarWishes"><!-- generated via JS --></div>
+      <div class="jar-lid"></div>
+    </div>
+  </div>
+</section>
+
+<div class="wish-popup" id="wishPopup">
+  <div class="wish-popup-card">
+    <button class="wish-popup-close" id="wishPopupClose">✕</button>
+    <p id="wishPopupText"></p>
+  </div>
+</div>
+
+<!-- ============================================================
+     SECTION 14 — FRIENDSHIP STATS
+============================================================ -->
+<section class="section section-stats" id="stats">
+  <p class="section-eyebrow">chapter fourteen</p>
+  <h2 class="section-title">Friendship, By The Numbers</h2>
+
+  <div class="stats-grid">
+    <!-- EDIT: change data-target to real numbers -->
+    <div class="stat-box"><span class="stat-num" data-target="7">0</span><label>Years Together</label></div>
+    <div class="stat-box"><span class="stat-num" data-target="99999">0</span><label>Photos To Be Taken</label></div>
+    <div class="stat-box"><span class="stat-num" data-target="9999">0</span><label>Laughs Shared</label></div>
+    <div class="stat-box"><span class="stat-num" data-target="99999">0</span><label>Memories To Be Made</label></div>
+    <div class="stat-box"><span class="stat-num" data-target="810">0</span><label>Late Night Chats</label></div>
+    <div class="stat-box"><span class="stat-num" data-target="87">0</span><label>Dreams Discussed</label></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 15 — FAVORITE THINGS
+============================================================ -->
+<section class="section section-favs" id="favorites">
+  <p class="section-eyebrow">chapter fifteen</p>
+  <h2 class="section-title">A Few Of Your Favorite Things</h2>
+
+  <div class="favs-grid">
+    <!-- EDIT: replace placeholder values -->
+    <div class="fav-card"><span class="fav-icon">🍜</span><h4>Favorite Food</h4><p>Chicken — her favorite dish</p></div>
+    <div class="fav-card"><span class="fav-icon">🎨</span><h4>Favorite Color</h4><p>Green — her favorite color</p></div>
+    <div class="fav-card"><span class="fav-icon">🎵</span><h4>Favorite Song</h4><p>Chenna Meraya — her favorite song</p></div>
+    <div class="fav-card"><span class="fav-icon">📍</span><h4>Favorite Place</h4><p>Home — her favorite place</p></div>
+    <div class="fav-card"><span class="fav-icon">✨</span><h4>Favorite Hobby</h4><p>Music — her favorite hobby</p></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 16 — SECRET SURPRISE (password gated)
+============================================================ -->
+<section class="section section-secret" id="secret">
+  <p class="section-eyebrow">chapter sixteen</p>
+  <h2 class="section-title">A Secret, Just For You</h2>
+  <p class="section-sub">hint: it's the reason we're all here today</p>
+
+  <div class="secret-lock" id="secretLock">
+    <!-- EDIT: change password in script.js (SECRET_PASSWORD constant) -->
+    <input type="password" id="secretInput" placeholder="enter the password" autocomplete="off">
+    <button class="btn-secondary" id="secretBtn">Unlock</button>
+    <p class="secret-error" id="secretError">not quite — try again 💭</p>
+  </div>
+
+  <div class="secret-reveal" id="secretReveal">
+    <div class="secret-fireworks" id="secretFireworks"></div>
+    <h3>Surprise!! 🎉</h3>
+    <p>You found it. This whole page exists because one day, someone decided the world
+      needed more of you in it. Happy Birthday, truly.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 17 — VIDEO SECTION
+============================================================ -->
+<section class="section section-video" id="videoSection">
+  <p class="section-eyebrow">chapter seventeen</p>
+  <h2 class="section-title">A Little Something To Watch</h2>
+
+  <div class="video-player" id="videoPlayer">
+    <!-- EDIT: replace assets/videos/video.mp4 -->
+    <video id="mainVideo" playsinline preload="metadata">
+      <source src="assets/videos/video.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay" id="videoOverlay">
+      <button class="video-play-btn" id="videoPlayBtn" aria-label="Play video">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      </button>
+    </div>
+    <div class="video-controls" id="videoControls">
+      <button id="videoToggle" class="vc-btn">▶</button>
+      <input type="range" id="videoSeek" class="vc-seek" value="0" min="0" max="100" step="0.1">
+      <span id="videoTime" class="vc-time">0:00</span>
+      <button id="videoMute" class="vc-btn">🔊</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 18 — FINAL SURPRISE
+============================================================ -->
+<section class="section section-final" id="finalSurprise">
+  <div class="final-sky" id="finalSky"></div>
+  <div class="final-content">
+    <h2 class="final-title">
+      <span class="final-line">Happy Birthday</span>
+      <span class="final-name" id="finalFriendName">My girl</span>
+    </h2>
+    <div class="final-message" id="finalMessage">
+      <p class="final-msg-line">No matter where life takes us,</p>
+      <p class="final-msg-line">you'll always have a special place in my heart.</p>
+      <p class="final-msg-line">Thank you for being an amazing friend.</p>
+      <p class="final-msg-line">Happy Birthday ❤️</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <p>made with love, one line of code at a time ✨</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
